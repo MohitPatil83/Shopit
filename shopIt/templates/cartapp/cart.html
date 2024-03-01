@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+  <!---main start-->
+
+  <div class="row my-5">
+
+    <div class="col-md-9">
+
+        <table class="table">
+            <tr>
+                <th class="text-secondary">CUSTOMER DETAILS</th>
+            </tr>
+            <tr>
+                <th>Customer Name:</th>
+                <td>{{user.username}}</td>
+
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{user.email}}</td>
+            </tr>
+            <!--<tr>
+                <th>Delivery Address:</th>
+                <td>2nd FLoor , ishan Archade 1,Near Gaodevi mandir, Thane-West</td>
+            </tr>
+            <tr>
+                <th>Pincode</th>
+                <td>425501</td>
+            </tr>-->
+
+
+        </table> <!----User Details End-->
+
+        <div class="bg-primary p-1">
+            <strong class="text-white">CARD SUMMARY</strong>
+        </div>
+        {% for x in data %}
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <img src="{% static 'assets/images/watch.jpg' %}" class="img-fluid" alt="Titan Watch">
+
+            </div><!---Product Image end-->
+            <div class="col-md-9">
+                <table class="table">
+                    <tr>
+                        <th>Product Name:</th>
+                        <td>{{x.pid.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description:</th>
+                        <td>{{x.pid.detail}}</td>
+                    </tr>
+                    <tr>
+                        <th>Price:</th>
+                        <td>&#8377;{{x.pid.price}}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity:</th>
+                        <td> <a href="changeqty?q=0&cid={{x.id}}" class="btn btn-danger">-</a>
+                            <input type="number" name="" id="" value="{{x.qty}}">
+                            <a href="changeqty?q=1&cid={{x.id}}" class="btn btn-success">+</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="remove/?id={{x.id}}" class="btn btn-primary">Remove</a></td>
+                    </tr>
+                </table>
+
+            </div><!--Product details End-->
+        </div><!--Cart product ends-->
+            {% endfor %}
+    </div><!---user and Product details-->
+
+    <div class="col-md-3">
+        {% if data %}
+        <table class="table">
+
+            <tr>
+                <th class="text-secondary">PRICE DETAILS</th>
+            </tr>
+            <tr>
+                <th>Price({{items}} items)</th>
+                <td>&#8377; {{total}}</td>
+            </tr>
+            <tr>
+                <th>Total Amount:</th>
+                <th>&#8377; {{total}}</th>
+            </tr>
+            <tr>
+                <td><a href="/orderapp/" class="btn btn-primary"><strong>PLACE ORDER</strong></a></td>
+            </tr>
+        </table>
+        {% else %}
+        <a href="/orderapp/" class="btn btn-primary"><strong>VIEW ORDER</strong></a>
+        {% endif %}
+    </div><!---price details-->
+</div>
+<!--Main End-->
+{% endblock 'main' %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+ <!---main start-->
+ <div class="row my-5">
+
+    <div class="col-md-3 bg-primary-subtle p-3">
+            <h5>Filter By Category</h5>
+            <hr>
+            <p><a href="/productapp/" class="sidebar"><strong>All</strong></a></p>
+            <p><a href="/productapp/filter?q=1" class="sidebar"><strong>Mobiles</strong></a></p>
+            <p><a href="/productapp/filter?q=2"  class="sidebar"><strong>Shoes</strong></a></p>
+            <p><a href="/productapp/filter?q=3"  class="sidebar"><strong>cloths</strong></a></p>
+
+            <h5>Sort By Price</h5>
+            <p><a href="/productapp/sort?q=0"  class="sidebar"><strong>Low To high</strong></a></p>
+            <p><a href="/productapp/sort?q=1"  class="sidebar"><strong>High to low</strong></a></p>
+
+            <h5>Filter By Range</h5>
+            <hr>
+            <form action="/productapp/range" method="GET">
+                <div class="mb-3">
+                    <label for="Input1" class="form-label"><strong>Min:</strong></label>
+                    <input type="number" class="form-control" id="Input1" name="min" placeholder="Min. Value">
+                  </div>
+                  <div class="mb-3">
+                    <label for="Input2" class="form-label"><strong>Max:</strong></label>
+                    <input type="number" class="form-control" id="Input2" name="max" placeholder="Max. Value">
+                  </div>
+                  <div class="mb-3">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                  </div>
+            </form>
+    </div> <!--Sidebar End-->
+
+    <div class="col-md-9">
+        <div class="row">
+            {% for x in data %}
+            <div class="col-md-3">
+                <div class="card" style="width: 100%">
+                    <img src="{{ x.path }}" class="card-img-top" height="150" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{x.name}}</h5>
+                      {% if x.cat == 1 %}
+                      <p class="card-text">mobile</p>
+                      {% elif x.cat == 2 %}
+                      <p class="card-text"> Shoes</p>
+                      {% else %}
+                      <p class="card-text">Cloths</p>
+                      {% endif %}
+                      <p class="card-text">&#8377; {{x.price}}</p>
+
+                      <a href="/productapp/detail?id={{x.id}}" class="btn btn-primary">See Details</a>
+                    </div>
+                  </div>
+            </div>
+           {% endfor %}
+            
+            
+        </div>
+    </div><!---Product List End-->
+
+
+
+</div>
+<!---Main End-->
+{% endblock 'main' %}

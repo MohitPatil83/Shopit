@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'main' %}
+   <!----main Start-->
+
+   <div class="row my-5">
+    <div class="col-md-4">
+        <img src="{% static 'assets/images/watch.jpg' %}" class="img-fluid" alt="Titan Watch">
+    </div><!---Product Image -->
+
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th class="text-secondary">Product name</th>
+                <td>{{data.name}}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{data.detail}}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>&#8377; {{data.price}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                <a href="/productapp/" class="btn btn-primary">Shop More</a>
+                <a href="/cartapp/addcart?id={{data.id}}" class="btn btn-primary">Add to Cart</a>
+                </td>
+            </tr>
+            
+        </table>
+        
+            {% if success %}
+            <div class ="alert alert-success">
+                {{success}}
+            </div>
+            {% endif %}
+
+            {% if vmsg %}
+            <div class="alert alert-danger">{{vmsg}}</div>
+            {% endif %}
+        
+
+    </div><!---Product Details end-->
+
+  </div>
+  <!---end Main -->
+  {% endblock 'main' %}
